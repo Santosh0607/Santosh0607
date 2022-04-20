@@ -1,7 +1,6 @@
 ### Hi there 👋
 
 
-- 🌱 I’m currently learning Blockchain teq
-- 💬 Ask me about c,c++,python,html,css
+- 🌱 I’m Learning c,c++,python,html,css,solidity
 - 📫 Sontoshregmi.com.np
 
