@@ -178,14 +178,18 @@ body {
 }
 
 .pixel-text {
-  position: relative;
-  color: var(--neon-red);
+  font-family: var(--font-pixel);
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+  color: #cc3355;
   text-shadow: 
-    0 0 10px var(--glow-red),
-    0 0 20px var(--glow-red),
-    0 0 40px var(--glow-red);
-  animation: text-glow 2s ease-in-out infinite alternate;
+    0 0 16px rgba(255, 0, 64, 0.6),
+    0 0 32px rgba(255, 0, 64, 0.4),
+    0 0 64px rgba(255, 0, 64, 0.2);
+  animation: mega-glow 2s ease-in-out infinite alternate;
+  position: relative;
 }
+
+
 
 .pixel-text::before,
 .pixel-text::after {
