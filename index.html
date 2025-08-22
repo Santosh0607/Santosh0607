@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Meta Tags -->
+    <title>Santosh Regmi - Game Developer & Digital Creator</title>
+    <meta name="description" content="Football lover, coding master, and investment guru. Building digital experiences one pixel at a time.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Santosh Regmi - Pixel Perfect Portfolio">
+    <meta property="og:description" content="Software engineering student creating awesome digital experiences">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://santoshregmi.dev">
+    <meta property="og:image" content="https://santoshregmi.dev/og-preview.jpg">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- CNAME for custom domain: santoshregmi.dev -->
+</head>
+<body>
+    <!-- Pixel Background Canvas -->
+    <canvas id="pixelBackground" aria-hidden="true"></canvas>
+    
+    <!-- Floating Particles -->
+    <div class="particle-container" aria-hidden="true"></div>
+
+    <main class="game-world">
+        <!-- Hero Section -->
+        <section class="hero-level" id="home">
+            <div class="hero-content">
+                <div class="pixel-avatar">
+                    <div class="avatar-sprite"></div>
+                    <div class="level-indicator">LVL 99</div>
+                </div>
+                
+                <h1 class="glitch-title">
+                    <span class="pixel-text" data-text="SANTOSH REGMI">SANTOSH REGMI</span>
+                </h1>
+                
+                <div class="typing-text">
+                    <span class="cursor">|</span>
+                </div>
+                
+                <div class="skill-icons">
+                    <div class="skill-item" data-skill="Football">
+                        <div class="pixel-icon football-icon"></div>
+                        <span>FOOTBALL</span>
+                    </div>
+                    <div class="skill-item" data-skill="Coding">
+                        <div class="pixel-icon code-icon"></div>
+                        <span>CODING</span>
+                    </div>
+                    <div class="skill-item" data-skill="Investing">
+                        <div class="pixel-icon money-icon"></div>
+                        <span>INVESTING</span>
+                    </div>
+                    <div class="skill-item" data-skill="Student">
+                        <div class="pixel-icon book-icon"></div>
+                        <span>STUDENT</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-arrow">
+                <div class="arrow-bounce">▼</div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-level" id="projects">
+            <h2 class="section-title">
+                <span class="pixel-border">MY PROJECTS</span>
+            </h2>
+            
+            <div class="project-grid">
+                <div class="project-card" data-project="1">
+                    <div class="card-header">
+                        <div class="card-icon">🎮</div>
+                        <div class="card-title">Neural Network Game</div>
+                    </div>
+                    <div class="card-content">
+                        <p>Teaching AI to play better than humans... still working on it!</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                        </div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                
+                <div class="project-card" data-project="2">
+                    <div class="card-header">
+                        <div class="card-icon">📈</div>
+                        <div class="card-title">Trading Algorithm</div>
+                    </div>
+                    <div class="card-content">
+                        <p>Bot that trades faster than my 5K running time (which isn't saying much)</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                
+                <div class="project-card" data-project="3">
+                    <div class="card-header">
+                        <div class="card-icon">⚽</div>
+                        <div class="card-title">Football Stats Tracker</div>
+                    </div>
+                    <div class="card-content">
+                        <p>Because even Messi needs good analytics</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">D3.js</span>
+                        </div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                
+                <div class="project-card" data-project="4">
+                    <div class="card-header">
+                        <div class="card-icon">💻</div>
+                        <div class="card-title">Portfolio Website</div>
+                    </div>
+                    <div class="card-content">
+                        <p>You're looking at it! Meta-coding at its finest</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-level" id="skills">
+            <h2 class="section-title">
+                <span class="pixel-border">SKILL TREE</span>
+            </h2>
+            
+            <div class="skill-tree">
+                <div class="skill-branch" data-category="frontend">
+                    <div class="branch-title">FRONTEND</div>
+                    <div class="skill-nodes">
+                        <div class="skill-node" data-level="95">
+                            <span class="skill-name">HTML/CSS</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-node" data-level="90">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-node" data-level="85">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-branch" data-category="backend">
+                    <div class="branch-title">BACKEND</div>
+                    <div class="skill-nodes">
+                        <div class="skill-node" data-level="80">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-node" data-level="75">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-node" data-level="70">
+                            <span class="skill-name">Databases</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="--width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Epic Social Media Section -->
+        <section class="social-arena" id="social">
+            <div class="arena-background"></div>
+            
+            <h2 class="mega-title">
+                <span class="animated-text">FOLLOW THE LEGEND</span>
+            </h2>
+            
+            <div class="social-grid">
+                <a href="https://github.com/Santosh0607" class="social-card github-card" target="_blank" rel="noopener">
+                    <div class="card-bg"></div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.374 0 0 5.373 0 12C0 17.302 3.438 21.8 8.207 23.387C8.806 23.498 9 23.126 9 22.81V20.576C5.662 21.302 4.967 19.16 4.967 19.16C4.421 17.773 3.634 17.404 3.634 17.404C2.545 16.659 3.717 16.675 3.717 16.675C4.922 16.759 5.556 17.912 5.556 17.912C6.626 19.746 8.363 19.216 9.048 18.909C9.155 18.134 9.466 17.604 9.81 17.305C7.145 17 4.343 15.971 4.343 11.374C4.343 10.063 4.812 8.993 5.579 8.153C5.455 7.85 5.044 6.629 5.696 4.977C5.696 4.977 6.704 4.655 8.997 6.207C9.954 5.941 10.98 5.808 12 5.803C13.02 5.808 14.047 5.941 15.006 6.207C17.297 4.655 18.303 4.977 18.303 4.977C18.956 6.63 18.545 7.851 18.421 8.153C19.191 8.993 19.656 10.064 19.656 11.374C19.656 15.983 16.849 16.998 14.177 17.295C14.607 17.667 15 18.397 15 19.517V22.81C15 23.129 15.192 23.504 15.801 23.386C20.566 21.797 24 17.300 24 12C24 5.373 18.626 0 12 0Z"/>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>GITHUB</h3>
+                        <p>WHERE THE MAGIC HAPPENS</p>
+                        <div class="follower-count">50+ REPOS</div>
+                    </div>
+                    <div class="hover-glow"></div>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/santosh-regmi0555" class="social-card linkedin-card" target="_blank" rel="noopener">
+                    <div class="card-bg"></div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.230 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.230 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z"/>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>LINKEDIN</h3>
+                        <p>PROFESSIONAL NETWORKING</p>
+                        <div class="follower-count">CONNECT NOW</div>
+                    </div>
+                    <div class="hover-glow"></div>
+                </a>
+                
+                <a href="https://www.instagram.com/santoshhregmi/" class="social-card instagram-card" target="_blank" rel="noopener">
+                    <div class="card-bg"></div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.850C21.620 20.075 20.105 21.621 16.850 21.769C15.584 21.827 15.206 21.839 12.001 21.839C8.796 21.839 8.416 21.827 7.152 21.769C3.891 21.620 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12.000C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.797 2.163 12.001 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.272 0.273 2.69 0.073 7.052C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.272 21.306 2.690 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.730 21.310 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311 0.273 16.949 0.073C15.668 0.014 15.259 0 12 0ZM12 5.838C8.597 5.838 5.838 8.597 5.838 12C5.838 15.403 8.597 18.162 12 18.162C15.403 18.162 18.162 15.403 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16C9.791 16 8 14.209 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.209 14.209 16 12 16ZM18.406 4.155C18.406 5.052 17.679 5.778 16.781 5.778C15.883 5.778 15.156 5.051 15.156 4.155C15.156 3.259 15.883 2.532 16.781 2.532C17.679 2.532 18.406 3.259 18.406 4.155Z"/>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>INSTAGRAM</h3>
+                        <p>DAILY ADVENTURES</p>
+                        <div class="follower-count">EPIC CONTENT</div>
+                    </div>
+                    <div class="hover-glow"></div>
+                </a>
+                
+                <a href="https://x.com/Santosh_Algo" class="social-card twitter-card" target="_blank" rel="noopener">
+                    <div class="card-bg"></div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25H21.552L14.325 10.51L22.827 21.75H16.17L10.956 14.933L4.99 21.75H1.68L9.41 12.915L1.254 2.25H8.08L12.793 8.481L18.244 2.25ZM17.083 19.77H18.916L7.084 4.126H5.117L17.083 19.77Z"/>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>X/TWITTER</h3>
+                        <p>THOUGHTS & UPDATES</p>
+                        <div class="follower-count">JOIN THE CONVO</div>
+                    </div>
+                    <div class="hover-glow"></div>
+                </a>
+                
+                <a href="https://www.flickr.com/photos/198249891@N07/" class="social-card flickr-card" target="_blank" rel="noopener">
+                    <div class="card-bg"></div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 12C0 18.627 5.373 24 12 24S24 18.627 24 12S18.627 0 12 0S0 5.373 0 12ZM6.4 12C6.4 9.016 8.816 6.6 11.8 6.6S17.2 9.016 17.2 12S14.784 17.4 11.8 17.4S6.4 14.984 6.4 12Z"/>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>FLICKR</h3>
+                        <p>PHOTOGRAPHY PORTFOLIO</p>
+                        <div class="follower-count">STUNNING SHOTS</div>
+                    </div>
+                    <div class="hover-glow"></div>
+                </a>
+                
+                <a href="https://steamcommunity.com/profiles/76561198836609320/" class="social-card steam-card" target="_blank" rel="noopener">
+                    <div class="card-bg"></div>
+                    <div class="social-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.979 0C5.678 0 .511 4.86.022 11.037L6.432 13.959C6.906 13.52 7.531 13.259 8.220 13.259C8.286 13.259 8.351 13.263 8.415 13.270L10.848 8.583C10.848 8.583 10.848 8.580 10.848 8.577C10.848 6.769 12.315 5.302 14.123 5.302S17.398 6.769 17.398 8.577S15.931 11.851 14.123 11.851C14.058 11.851 13.993 11.849 13.928 11.845L9.293 14.254C9.293 14.320 9.296 14.385 9.296 14.451C9.296 16.759 7.428 18.627 5.120 18.627C3.210 18.627 1.572 17.271 1.178 15.451L.022 11.037C.511 17.174 5.678 22 11.979 22C18.627 22 24 16.627 24 11.979S18.627 0 11.979 0ZM7.54 16.238L6.043 15.665C6.458 16.427 7.253 16.972 8.220 16.972C9.496 16.972 10.532 15.936 10.532 14.659S9.496 13.623 8.220 13.623C7.253 13.623 6.458 14.168 6.043 14.930L7.54 15.503C8.185 15.281 8.895 15.623 9.117 16.268S8.730 17.413 8.085 17.635S6.940 17.248 6.718 16.603C6.607 16.281 6.640 15.930 6.805 15.638L7.54 16.238ZM14.123 9.302C15.187 9.302 16.048 8.441 16.048 7.377S15.187 5.452 14.123 5.452S12.198 6.313 12.198 7.377S13.059 9.302 14.123 9.302Z"/>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>STEAM</h3>
+                        <p>GAMING PROFILE</p>
+                        <div class="follower-count">LET'S PLAY</div>
+                    </div>
+                    <div class="hover-glow"></div>
+                </a>
+            </div>
+            
+            <div class="call-to-action">
+                <h3 class="cta-title">🔥 DON'T MISS OUT ON THE ACTION! 🔥</h3>
+                <p class="cta-text">Follow for epic content, coding tips, and behind-the-scenes magic!</p>
+                <button class="cta-button" onclick="window.location.href='mailto:santosh@example.com'">
+                    <span>GET IN TOUCH</span>
+                    <div class="button-glow"></div>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Santosh Regmi • Powered by pixels, passion, and pure determination 🎮</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
