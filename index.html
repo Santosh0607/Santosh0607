@@ -84,14 +84,30 @@
         .project-img {
             width: 100%;
             height: 240px;
-            object-fit: cover;
             background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             border-bottom: 1px solid #222;
+            text-align: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            transition: background 0.3s;
+        }
+        .project-img:hover {
+            background: linear-gradient(135deg, #222, #111);
+            color: var(--accent);
+        }
+        .project-img a {
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .card-body {
             padding: 1.8rem;
@@ -141,13 +157,12 @@
             display: block;
             font-size: 1.1rem;
         }
-        .stats-grid {
+        .activity-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
-        .stats-grid img {
+        .activity-grid img {
             width: 100%;
             border-radius: 12px;
             background: #111;
@@ -171,40 +186,19 @@
         <div class="container">
             <h1>Santosh Regmi</h1>
             <p>Software Engineer · Nepal</p>
-            <p>Investor. Building web applications, AI solutions, blockchain projects, and more.</p>
+            <p>Investor. Building web applications, AI , blockchain , and more.</p>
         </div>
     </header>
 
-    <section id="about">
-        <div class="container">
-            <h2>About</h2>
-            <p style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--text-secondary);">
-                Self-taught engineer focused on full-stack development, artificial intelligence, and blockchain technologies.
-                Currently expanding expertise in Python, TypeScript, Solidity, and emerging tools.
-                Passionate about creating scalable, user-focused products.
-            </p>
-        </div>
-    </section>
+    <
 
-    <section id="skills">
+    <section id="github">
         <div class="container">
-            <h2>GitHub Contributions</h2>
-            <div class="stats-grid">
-                <!-- Streak stats (this one loaded reliably in your screenshots) -->
-                <img src="https://github-readme-streak-stats.herokuapp.com/?user=Santosh0607&theme=tokyonight&hide_border=true" alt="GitHub Streak">
-                
-                <!-- Contribution graph (also loaded in your screenshots) -->
-                <img src="https://ghchart.rshah.org/00ff88/Santosh0607" alt="Contribution Graph">
-                
-                <!-- Main stats card – sometimes slow/rate-limited; refresh if ? appears -->
-                <img src="https://github-readme-stats.vercel.app/api?username=Santosh0607&theme=tokyonight&hide_border=true&show_icons=true&include_all_commits=true" alt="GitHub Stats">
-                
-                <!-- Top languages – sometimes slow; refresh if ? appears -->
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Santosh0607&theme=tokyonight&hide_border=true&layout=compact" alt="Top Languages">
+            <h2>GitHub Activity</h2>
+            <div class="activity-grid">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=Santosh0607&theme=tokyonight&hide_border=true" alt="GitHub Streak Stats">
+                <img src="https://ghchart.rshah.org/00ff88/Santosh0607" alt="GitHub Contribution Graph">
             </div>
-            <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 2rem;">
-                Note: These are live dynamic images from external services. On mobile or slow networks they may load slowly or show "?" temporarily — try refreshing or viewing on desktop.
-            </p>
         </div>
     </section>
 
@@ -213,7 +207,11 @@
             <h2>Projects</h2>
             <div class="grid">
                 <div class="card">
-                    <div class="project-img">Rashi Byte – Live Site Preview</div>
+                    <div class="project-img">
+                        <a href="https://imgur.com/a/wce4SbN" target="_blank">
+                            View Project Screenshots
+                        </a>
+                    </div>
                     <div class="card-body">
                         <h3>Rashi Byte</h3>
                         <p>Vedic astrology platform with AI-powered Kundali generation, planetary analysis, dasha periods, and personalized insights.</p>
@@ -221,7 +219,11 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="project-img">SS Garment – Live Demo Preview</div>
+                    <div class="project-img">
+                        <a href="https://imgur.com/gallery/Xju09tK" target="_blank">
+                            View Project Screenshots
+                        </a>
+                    </div>
                     <div class="card-body">
                         <h3>SS Garment</h3>
                         <p>Custom t-shirt design studio featuring AI background removal, drag-and-drop editor, multiple styles, and high-resolution export.</p>
@@ -229,7 +231,11 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="project-img">StockAI – Demo Preview</div>
+                    <div class="project-img">
+                        <a href="https://imgur.com/gallery/asGHAgR" target="_blank">
+                            View Project Screenshots
+                        </a>
+                    </div>
                     <div class="card-body">
                         <h3>StockAI</h3>
                         <p>AI-driven stock market analysis tool built with Python (college project).</p>
@@ -237,9 +243,6 @@
                     </div>
                 </div>
             </div>
-            <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 2rem;">
-                To show actual screenshots: take screenshots of each site, upload them (e.g., to imgur or GitHub), and replace the text inside each .project-img div with &lt;img src="your-screenshot-url.jpg" style="width:100%;height:100%;object-fit:cover;"&gt;
-            </p>
         </div>
     </section>
 
