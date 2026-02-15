@@ -1,484 +1,279 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Santosh Regmi — Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santosh Regmi | Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Variables & Reset */
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(25, 25, 25, 0.8);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent: #2c6bed;
+        }
 
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-  <style>
-    :root{
-      --bg:#0b0d0f;
-      --card:#0f1113;
-      --muted:#9aa4ae;
-      --accent:#0ea5a8; /* teal-ish */
-      --glass: rgba(255,255,255,0.03);
-      --glass-2: rgba(255,255,255,0.02);
-      --max-width:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background: linear-gradient(180deg,#050607 0%, #0b0d0f 60%);
-      color:#e6eef6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px 20px;
-      background-attachment:fixed;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
 
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-      margin:0 auto;
-      position:relative;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow: 0 8px 30px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border: 1px solid rgba(255,255,255,0.03);
-    }
+        /* Intro Animation Loader */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+        }
 
-    header{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      padding:28px 36px;
-      border-bottom:1px solid rgba(255,255,255,0.02);
-      background: linear-gradient(180deg, rgba(255,255,255,0.008), transparent);
-    }
-    .logo {
-      width:64px;
-      height:64px;
-      border-radius:10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      font-size:20px;
-      letter-spacing:0.6px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border:1px solid rgba(255,255,255,0.02);
-      color:var(--accent);
-      box-shadow: 0 2px 10px rgba(14,165,168,0.06);
-    }
-    .title {
-      flex:1;
-    }
-    .title h1{
-      margin:0;
-      font-size:20px;
-      font-weight:700;
-      letter-spacing:0.2px;
-    }
-    .title p{ margin:4px 0 0; color:var(--muted); font-size:13px }
+        .loader-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5rem;
+            animation: pulse 1.5s infinite alternate;
+        }
 
-    .hero{
-      display:grid;
-      grid-template-columns: 1fr 360px;
-      gap:32px;
-      padding:36px;
-      align-items:start;
-    }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
 
-    .intro-card{
-      padding:28px;
-      background: linear-gradient(180deg,var(--glass),var(--glass-2));
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.02);
-      box-shadow: 0 6px 20px rgba(2,6,23,0.5);
-    }
-    .intro-card h2{ margin:0; font-size:28px; font-weight:800; letter-spacing:-0.3px;}
-    .intro-card p{ color:var(--muted); margin-top:10px; line-height:1.45; font-size:15px; }
+        /* Bento Grid Container */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 180px;
+            gap: 16px;
+            max-width: 1000px;
+            width: 90%;
+            margin: 40px auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
 
-    .kpis{
-      display:flex;
-      gap:14px;
-      margin-top:20px;
-    }
-    .kpi{
-      background:transparent;
-      padding:12px 16px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.02);
-      min-width:110px;
-      text-align:center;
-    }
-    .kpi strong{ display:block; font-size:16px; font-weight:700; }
-    .kpi span{ color:var(--muted); font-size:12px; }
+        .bento-grid.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* Social / projects column */
-    .side{
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    .socials{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .s-btn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:10px;
-      background:rgba(255,255,255,0.01);
-      border:1px solid rgba(255,255,255,0.02);
-      min-width:170px;
-      text-decoration:none;
-      color:inherit;
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .s-btn:hover{ transform:translateY(-6px); box-shadow:0 10px 30px rgba(2,6,23,0.6) }
+        /* Base Card Styling */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .s-icon{
-      width:28px;height:28px; display:inline-flex; align-items:center; justify-content:center;
-      border-radius:6px; background:linear-gradient(180deg,rgba(255,255,255,0.015),rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.02);
-      font-size:16px;
-      color:var(--accent);
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
 
-    main{ padding:22px 36px 48px; }
-    .projects-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:18px;
-      margin-top:10px;
-    }
+        /* Grid Spans */
+        .span-2x2 { grid-column: span 2; grid-row: span 2; }
+        .span-2x1 { grid-column: span 2; grid-row: span 1; }
+        .span-1x1 { grid-column: span 1; grid-row: span 1; }
 
-    .proj{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
-      border-radius:12px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,0.02);
-      transition: transform .18s ease, box-shadow .18s ease;
-      text-decoration:none;
-      color:inherit;
-      overflow:hidden;
-    }
-    .proj:hover{ transform:translateY(-8px); box-shadow: 0 18px 40px rgba(2,6,23,0.6) }
+        /* Specific Cards */
+        .profile-card {
+            justify-content: flex-end;
+            background: linear-gradient(135deg, rgba(30,30,30,1) 0%, rgba(15,15,15,1) 100%);
+        }
 
-    .thumb{
-      width:100%;
-      height:140px;
-      border-radius:8px;
-      background-size:cover;
-      background-position:center;
-      border:1px solid rgba(255,255,255,0.02);
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-end;
-      padding:8px;
-      font-size:12px;
-      color:var(--muted);
-      background-color:#081015;
-    }
-    .proj .meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-    }
-    .proj h3{ margin:0; font-size:15px; font-weight:700;}
-    .proj p{ margin:6px 0 0; color:var(--muted); font-size:13px;}
+        .profile-card h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
 
-    footer{
-      padding:18px 36px;
-      border-top:1px solid rgba(255,255,255,0.02);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color:var(--muted);
-      font-size:13px;
-    }
+        .profile-card p {
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.5;
+        }
 
-    /* Entrance overlay animation */
-    .overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(135deg, rgba(14,165,168,0.05), rgba(0,0,0,0.0));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:9;
-      backdrop-filter: blur(4px);
-      pointer-events:none;
-    }
-    .overlay .badge{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      background: rgba(255,255,255,0.02);
-      padding:18px 26px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.03);
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      transform: scale(0.98);
-      opacity:0;
-      animation: badgeIn 1s cubic-bezier(.2,.9,.2,1) forwards 0.2s;
-    }
-    @keyframes badgeIn{
-      to{ transform: scale(1); opacity:1 }
-    }
+        /* Social Cards */
+        .social-card {
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: var(--text-muted);
+        }
 
-    /* small loader ring */
-    .ring{
-      width:48px;height:48px;border-radius:50%;
-      border:3px solid rgba(255,255,255,0.04);
-      border-top-color:var(--accent);
-      animation:spin 1s linear infinite;
-    }
-    @keyframes spin{ to{ transform:rotate(360deg) } }
+        .social-card:hover { color: var(--text-main); }
+        .social-card i { transition: transform 0.3s ease; }
+        .social-card:hover i { transform: scale(1.1); }
 
-    /* entrance timeline */
-    .hidden-on-load{ opacity:0; transform: translateY(8px); }
-    .reveal{ animation: appear .7s ease forwards; }
-    @keyframes appear{ to{ opacity:1; transform:none } }
+        /* Project Cards */
+        .project-card {
+            background-size: cover;
+            background-position: center;
+            justify-content: flex-end;
+        }
 
-    /* responsive */
-    @media (max-width:920px){
-      .hero{ grid-template-columns: 1fr; }
-      .side{ flex-direction:row; flex-wrap:wrap; }
-      .s-btn{ min-width:140px }
-    }
-  </style>
+        .project-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .project-content span {
+            font-size: 0.85rem;
+            color: #d0d0d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Image place holders for projects */
+        .bg-rashibyte { background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop'); }
+        .bg-ssgarment { background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=600&auto=format&fit=crop'); }
+        .bg-stockai { background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=600&auto=format&fit=crop'); }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .span-2x2 { grid-column: span 2; }
+            .span-2x1 { grid-column: span 2; }
+        }
+
+        @media (max-width: 500px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .span-2x2, .span-2x1, .span-1x1 {
+                grid-column: span 1;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container" id="app">
-    <!-- overlay shown at start, hides after animation -->
-    <div class="overlay" id="overlay" aria-hidden="true">
-      <div class="badge" role="status" aria-live="polite">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <div style="font-weight:800; font-size:18px; color:var(--accent)">Santosh Regmi</div>
-          <div style="font-size:13px; color:var(--muted)">Software Engineer • Data & ML • Web</div>
-        </div>
-        <div style="width:14px"></div>
-        <div class="ring" aria-hidden="true"></div>
-      </div>
+
+    <div id="loader">
+        <div class="loader-text">SANTOSH REGMI</div>
     </div>
 
-    <header>
-      <div class="logo">SR</div>
-      <div class="title">
-        <h1>Santosh Regmi</h1>
-        <p>Software Engineer — building reliable ML & web systems • clean, enterprise-grade deliverables</p>
-      </div>
-      <nav style="display:flex;gap:10px;align-items:center">
-        <a class="s-btn" href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener">
-          <span class="s-icon" aria-hidden="true">
-            <!-- LinkedIn SVG -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5C4.98 4.6 4.1 5.5 2.98 5.5C1.86 5.5 1 4.6 1 3.5C1 2.35 1.86 1.5 2.98 1.5C4.1 1.5 4.98 2.35 4.98 3.5Z" fill="currentColor"/><path d="M6.5 8.5H0.5V23.5H6.5V8.5Z" fill="currentColor"/><path d="M13.5 8.5C10.98 8.5 9.5 10.2 9.5 10.2V8.5H3.5V23.5H9.5V15.2C9.5 12.5 12 11.3 12 13.7V23.5H18V13C18 7.5 15.02 8.5 13.5 8.5Z" fill="currentColor"/></svg>
-          </span>
-          LinkedIn
-        </a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div class="intro-card hidden-on-load" id="intro">
-        <h2>Hi — I’m Santosh.</h2>
-        <p>I design and build web and machine learning products with production-first rigor. I enjoy making systems simple, auditable, and scalable for teams in enterprise settings.</p>
-
-        <div class="kpis">
-          <div class="kpi"><strong>ML & Web</strong><span>Production-ready</span></div>
-          <div class="kpi"><strong>Collaborative</strong><span>Cross-team</span></div>
-          <div class="kpi"><strong>Secure</strong><span>Enterprise standards</span></div>
-        </div>
-
-        <div style="margin-top:20px; display:flex; gap:12px; align-items:center;">
-          <a class="s-btn" href="https://github.com/Santosh0607" target="_blank" rel="noopener">
-            <span class="s-icon" aria-hidden="true">
-              <!-- GitHub SVG -->
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.6-3.37-1.16-3.37-1.16-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.64.35-1.08.64-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.02-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.54 9.54 0 0112 6.8c.85.004 1.7.115 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.63.7 1.02 1.6 1.02 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85 0 1.33-.01 2.4-.01 2.73 0 .26.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z" fill="currentColor"/></svg>
-            </span>
-            GitHub
-          </a>
-
-          <a class="s-btn" href="https://www.instagram.com/santoshhregmi?igsh=MWRtNTV2cWQ5dmEzYQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">
-            <span class="s-icon" aria-hidden="true">
-              <!-- Insta SVG simplified -->
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
-            </span>
-            Instagram
-          </a>
-        </div>
-      </div>
-
-      <aside class="side">
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div style="font-size:13px; color:var(--muted)">Connect</div>
-          <div class="socials" id="socials">
-            <!-- Social buttons (user-provided links) -->
-            <a class="s-btn" href="https://x.com/santosh_algo?s=21" target="_blank" rel="noopener">
-              <span class="s-icon" aria-hidden="true">
-                <!-- X (Twitter) simplified -->
-                <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22 5.92c-.56.25-1.17.41-1.8.48.65-.39 1.15-1.01 1.39-1.75-.61.36-1.29.63-2.01.77C18.83 4.6 17.98 4 17 4c-1.54 0-2.78 1.25-2.78 2.79 0 .22.02.44.07.65C11.76 7.34 9.05 5.9 7.11 3.7c-.24.41-.38.9-.38 1.41 0 .97.49 1.83 1.23 2.33-.46-.01-.9-.14-1.28-.35v.04c0 1.36.97 2.5 2.25 2.76-.23.06-.48.09-.73.09-.18 0-.35-.02-.52-.05.35 1.09 1.36 1.88 2.56 1.9C8.14 13.4 6.9 14 5.56 14c-.25 0-.5-.01-.75-.05C6.48 14.86 7.96 15.4 9.56 15.4 17 15.4 21 10.2 21 5.38c0-.18-.01-.36-.02-.54.45-.33.84-.74 1.15-1.21-.42.19-.87.32-1.33.37z" fill="currentColor"/></svg>
-              </span>
-              X
-            </a>
-
-            <a class="s-btn" href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" rel="noopener">
-              <span class="s-icon" aria-hidden="true">
-                <!-- Steam circle -->
-                <svg width="14" height="14" viewBox="0 0 24 24"><path d="M21.5 9.5c0 2.76-2.24 5-5 5-1.02 0-1.96-.3-2.75-.82l-3.21 1.52c.08.31.12.63.12.96 0 1.93-1.57 3.5-3.5 3.5S3 18.09 3 16.16 4.57 12.66 6.5 12.66c.84 0 1.6.28 2.21.73l3.06-1.45A4.98 4.98 0 0016.5 7c2.76 0 5 2.24 5 5z" fill="currentColor"/></svg>
-              </span>
-              Steam
-            </a>
-
-            <a class="s-btn" href="https://flickr.com/photos/198249891@N07" target="_blank" rel="noopener">
-              <span class="s-icon" aria-hidden="true">
-                <!-- Flickr circle -->
-                <svg width="14" height="14" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3" fill="currentColor"/><circle cx="16" cy="12" r="3" fill="currentColor" /></svg>
-              </span>
-              Flickr
-            </a>
-
-            <a class="s-btn" href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" rel="noopener">
-              <!-- duplicate intentionally removed earlier; kept Steam once -->
-            </a>
-          </div>
-
-          <div style="font-size:13px; color:var(--muted); margin-top:8px">Quick links</div>
-
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <a class="s-btn" href="https://www.rashibyte.com" target="_blank" rel="noopener">
-              <span style="width:10px"></span> Portfolio (www.rashibyte.com)
-            </a>
-            <a class="s-btn" href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" rel="noopener">
-              <span style="width:10px"></span> Ss Garment (e-commerce)
-            </a>
-            <a class="s-btn" href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" rel="noopener">
-              <span style="width:10px"></span> STOCKAIDEMO (HuggingFace)
-            </a>
-          </div>
-        </div>
-
-        <div style="margin-top:auto;">
-          <div style="font-size:12px; color:var(--muted)">Resume • Contact</div>
-          <div style="margin-top:8px; display:flex; gap:8px;">
-            <a class="s-btn" href="mailto:santosh@rashibyte.com" aria-label="Email Santosh">Email</a>
-            <a class="s-btn" href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <main>
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;">
-        <div>
-          <h3 style="margin:0;font-size:16px">Selected Projects</h3>
-          <div style="color:var(--muted); font-size:13px; margin-top:6px">Live demos, web apps and ML prototypes.</div>
-        </div>
-        <div style="color:var(--muted); font-size:13px">Updated: <strong style="color:var(--accent)">Feb 15, 2026</strong></div>
-      </div>
-
-      <div class="projects-grid" id="projects">
-        <!-- Project: Rashibyte -->
-        <a class="proj" href="https://www.rashibyte.com" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image: url('https://www.google.com/s2/favicons?domain=rashibyte.com&sz=256');">
-            <!-- small overlay text -->
-          </div>
-          <div class="meta">
-            <div>
-              <h3>Rashibyte — Personal Site</h3>
-              <p>Primary portfolio and personal site (projects, blog, contact).</p>
+    <main class="bento-grid" id="main-grid">
+        
+        <div class="card span-2x2 profile-card">
+            <div style="margin-bottom: auto;">
+                <i class="fa-solid fa-bolt" style="color: var(--accent); font-size: 1.5rem;"></i>
             </div>
-            <div style="text-align:right;color:var(--muted);font-size:12px">rashibyte.com</div>
-          </div>
+            <div>
+                <h1>Santosh Regmi</h1>
+                <p>Software Engineer & Algorithmic Developer. Showcasing a blend of sophisticated engineering and scalable architecture.</p>
+            </div>
+        </div>
+
+        <a href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="card span-1x1 social-card">
+            <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/Santosh0607" target="_blank" class="card span-1x1 social-card">
+            <i class="fa-brands fa-github"></i>
         </a>
 
-        <!-- Project: Ss Garment -->
-        <a class="proj" href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image: url('https://www.google.com/s2/favicons?domain=vercel.app&sz=256');"></div>
-          <div class="meta">
-            <div>
-              <h3>Ss Garment (e-commerce)</h3>
-              <p>Full-stack e-commerce demo — product pages, cart and checkout flow.</p>
-            </div>
-            <div style="text-align:right;color:var(--muted);font-size:12px">vercel.app</div>
-          </div>
+        <a href="https://x.com/santosh_algo?s=21" target="_blank" class="card span-1x1 social-card">
+            <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/santoshhregmi?igsh=MWRtNTV2cWQ5dmEzYQ%3D%3D&utm_source=qr" target="_blank" class="card span-1x1 social-card">
+            <i class="fa-brands fa-instagram"></i>
         </a>
 
-        <!-- Project: STOCKAIDEMO -->
-        <a class="proj" href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image: url('https://www.google.com/s2/favicons?domain=huggingface.co&sz=256');"></div>
-          <div class="meta">
-            <div>
-              <h3>STOCKAIDEMO</h3>
-              <p>ML demo: stock-market models and visualization prototype on Hugging Face Spaces.</p>
+        <a href="https://www.rashibyte.com" target="_blank" class="card span-2x1 project-card bg-rashibyte">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+                <span>Enterprise</span>
+                <h3>Rashibyte</h3>
             </div>
-            <div style="text-align:right;color:var(--muted);font-size:12px">huggingface.co</div>
-          </div>
         </a>
 
-        <!-- Addable template project -->
-        <a class="proj" href="https://github.com/Santosh0607" target="_blank" rel="noopener">
-          <div class="thumb" style="background-image: url('https://www.google.com/s2/favicons?domain=github.com&sz=256');"></div>
-          <div class="meta">
-            <div>
-              <h3>Code & Contributions</h3>
-              <p>Source code, packages and experiment notebooks (GitHub).</p>
+        <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="card span-2x1 project-card bg-ssgarment">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+                <span>E-Commerce</span>
+                <h3>SS Garment</h3>
             </div>
-            <div style="text-align:right;color:var(--muted);font-size:12px">github.com</div>
-          </div>
         </a>
-      </div>
+
+        <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="card span-2x1 project-card bg-stockai">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+                <span>Machine Learning</span>
+                <h3>Stock AI Predictor</h3>
+            </div>
+        </a>
+
+        <a href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" class="card span-1x1 social-card">
+            <i class="fa-brands fa-steam"></i>
+        </a>
+        <a href="https://flickr.com/photos/198249891@N07" target="_blank" class="card span-1x1 social-card">
+            <i class="fa-brands fa-flickr"></i>
+        </a>
+
     </main>
 
-    <footer>
-      <div>© <strong>Santosh Regmi</strong> — Professional portfolio</div>
-      <div style="display:flex;gap:12px;align-items:center">
-        <a href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" rel="noopener" style="color:var(--muted); text-decoration:none">LinkedIn</a>
-        <span style="color:var(--muted)">•</span>
-        <a href="mailto:santosh@rashibyte.com" style="color:var(--muted); text-decoration:none">Email</a>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    // entrance overlay + staged reveals
-    (function(){
-      const overlay = document.getElementById('overlay');
-      const revealEls = [
-        document.getElementById('intro'),
-        ...Array.from(document.querySelectorAll('.s-btn')),
-        ...Array.from(document.querySelectorAll('.proj'))
-      ];
-      // After a short timed animation, fade overlay then reveal elements staggered.
-      window.addEventListener('load', () => {
-        // show overlay for 900ms then remove
-        setTimeout(()=> {
-          overlay.style.transition = 'opacity .6s ease, transform .6s ease';
-          overlay.style.opacity = '0';
-          overlay.style.transform = 'translateY(-8px)';
-          setTimeout(()=> overlay.remove(), 700);
-        }, 900);
-
-        // staggered reveal
-        revealEls.forEach((el, idx) => {
-          el.style.opacity = 0;
-          el.style.transform = 'translateY(8px)';
-          setTimeout(()=> {
-            el.classList.add('reveal');
-            el.style.opacity = 1;
-            el.style.transform = 'none';
-          }, 900 + idx * 80);
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Remove loader and trigger bento animation after 1.8 seconds
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                const grid = document.getElementById('main-grid');
+                
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.visibility = 'hidden';
+                    grid.classList.add('loaded');
+                }, 800); // wait for fade out to finish
+            }, 1800);
         });
-      });
-    })();
-  </script>
+    </script>
 </body>
 </html>
