@@ -85,12 +85,13 @@
             width: 100%;
             height: 240px;
             object-fit: cover;
-            background: #222;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
             font-size: 1.1rem;
+            border-bottom: 1px solid #222;
         }
         .card-body {
             padding: 1.8rem;
@@ -110,7 +111,7 @@
             background: transparent;
             border: 1px solid var(--accent);
             border-radius: 6px;
-            transition: background 0.3s;
+            transition: background 0.3s, color 0.3s;
         }
         .btn:hover {
             background: var(--accent);
@@ -149,12 +150,19 @@
         .stats-grid img {
             width: 100%;
             border-radius: 12px;
+            background: #111;
         }
         footer {
             text-align: center;
             padding: 3rem 0;
             color: var(--text-secondary);
             font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+        .domain {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--accent);
         }
     </style>
 </head>
@@ -162,31 +170,41 @@
     <header>
         <div class="container">
             <h1>Santosh Regmi</h1>
-            <p>Software Developer · Nepal</p>
-            <p>Building web applications, exploring AI, and learning blockchain development</p>
+            <p>Software Engineer · Nepal</p>
+            <p>Investor. Building web applications, AI solutions, blockchain projects, and more.</p>
         </div>
-        </header>
+    </header>
 
     <section id="about">
         <div class="container">
             <h2>About</h2>
             <p style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--text-secondary);">
-                I am a self-taught developer focused on full-stack web development, AI integration, and blockchain technologies. 
-                Currently expanding my skills in C, C++, Python, HTML, CSS, TypeScript, and Solidity. 
-                Passionate about creating practical, user-centered applications.
+                Self-taught engineer focused on full-stack development, artificial intelligence, and blockchain technologies.
+                Currently expanding expertise in Python, TypeScript, Solidity, and emerging tools.
+                Passionate about creating scalable, user-focused products.
             </p>
         </div>
     </section>
 
     <section id="skills">
         <div class="container">
-            <h2>GitHub Activity</h2>
+            <h2>GitHub Contributions</h2>
             <div class="stats-grid">
-                <img src="https://github-readme-stats.vercel.app/api?username=Santosh0607&theme=tokyonight&hide_border=true&show_icons=true" alt="GitHub Stats">
+                <!-- Streak stats (this one loaded reliably in your screenshots) -->
                 <img src="https://github-readme-streak-stats.herokuapp.com/?user=Santosh0607&theme=tokyonight&hide_border=true" alt="GitHub Streak">
-                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Santosh0607&theme=tokyonight&hide_border=true&layout=compact" alt="Top Languages">
+                
+                <!-- Contribution graph (also loaded in your screenshots) -->
                 <img src="https://ghchart.rshah.org/00ff88/Santosh0607" alt="Contribution Graph">
+                
+                <!-- Main stats card – sometimes slow/rate-limited; refresh if ? appears -->
+                <img src="https://github-readme-stats.vercel.app/api?username=Santosh0607&theme=tokyonight&hide_border=true&show_icons=true&include_all_commits=true" alt="GitHub Stats">
+                
+                <!-- Top languages – sometimes slow; refresh if ? appears -->
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Santosh0607&theme=tokyonight&hide_border=true&layout=compact" alt="Top Languages">
             </div>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 2rem;">
+                Note: These are live dynamic images from external services. On mobile or slow networks they may load slowly or show "?" temporarily — try refreshing or viewing on desktop.
+            </p>
         </div>
     </section>
 
@@ -195,30 +213,33 @@
             <h2>Projects</h2>
             <div class="grid">
                 <div class="card">
-                    <div class="project-img">Rashi Byte – Astrology Platform Screenshot</div>
+                    <div class="project-img">Rashi Byte – Live Site Preview</div>
                     <div class="card-body">
                         <h3>Rashi Byte</h3>
-                        <p>A free Vedic astrology platform offering AI-driven Kundali generation, planetary analysis, dasha periods, and personalized predictions.</p>
+                        <p>Vedic astrology platform with AI-powered Kundali generation, planetary analysis, dasha periods, and personalized insights.</p>
                         <a href="https://www.rashibyte.com" target="_blank" class="btn">Visit Site</a>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="project-img">SS Garment – Custom T-Shirt Designer Screenshot</div>
+                    <div class="project-img">SS Garment – Live Demo Preview</div>
                     <div class="card-body">
                         <h3>SS Garment</h3>
-                        <p>An intuitive custom t-shirt design studio with AI background removal, drag-and-drop uploads, multiple styles/colors, and high-resolution exports.</p>
+                        <p>Custom t-shirt design studio featuring AI background removal, drag-and-drop editor, multiple styles, and high-resolution export.</p>
                         <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="btn">Visit Site</a>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="project-img">StockAI Demo – AI Stock Analysis Screenshot</div>
+                    <div class="project-img">StockAI – Demo Preview</div>
                     <div class="card-body">
-                        <h3>StockAI (College Project)</h3>
-                        <p>An AI-powered stock market analysis demo built with Python and deployed on Hugging Face Spaces.</p>
+                        <h3>StockAI</h3>
+                        <p>AI-driven stock market analysis tool built with Python (college project).</p>
                         <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="btn">View Demo</a>
                     </div>
                 </div>
             </div>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-top: 2rem;">
+                To show actual screenshots: take screenshots of each site, upload them (e.g., to imgur or GitHub), and replace the text inside each .project-img div with &lt;img src="your-screenshot-url.jpg" style="width:100%;height:100%;object-fit:cover;"&gt;
+            </p>
         </div>
     </section>
 
@@ -257,6 +278,7 @@
     <footer>
         <div class="container">
             © 2026 Santosh Regmi. All rights reserved.
+            <div class="domain">santoshregmi.com.np</div>
         </div>
     </footer>
 </body>
