@@ -3,340 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santosh Regmi </title>
+    <title>Santosh Regmi</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
     <style>
-        /* High-End Dark Theme Variables */
         :root {
-            --bg-base: #030303;
-            --bg-grid: rgba(255, 255, 255, 0.03);
-            --card-bg: rgba(15, 15, 15, 0.6);
-            --card-border: rgba(255, 255, 255, 0.06);
-            --card-hover-border: rgba(255, 255, 255, 0.2);
-            --text-primary: #f0f0f0;
-            --text-secondary: #888888;
+            --bg: #050505;
+            --card: #0f0f0f;
+            --border: #1f1f1f;
             --accent: #ffffff;
-            --font-main: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --text-dim: #666;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            min-height: 100vh;
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
-            /* Subtle technical grid background */
-            background-image: linear-gradient(var(--bg-grid) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-            background-size: 40px 40px;
             padding: 40px 20px;
+            overflow-x: hidden;
         }
 
-        /* Initializing Terminal Loader */
-        #terminal-loader {
+        /* Startup Animation */
+        #gate {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg-base);
+            inset: 0;
+            background: #000;
+            z-index: 100;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s;
-            font-family: var(--font-mono);
-            color: var(--text-secondary);
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        /* Main Grid Architecture */
-        .grid-container {
+        .bento {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 200px;
-            gap: 20px;
-            max-width: 1100px;
+            grid-auto-rows: 160px;
+            gap: 12px;
+            max-width: 1000px;
             width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .grid-container.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Glassmorphism Cards */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px; /* Sharper corners for a corporate look */
-            padding: 24px;
-            text-decoration: none;
-            color: var(--text-primary);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 4px; /* Professional sharp corners */
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            padding: 20px;
         }
 
         .card:hover {
-            border-color: var(--card-hover-border);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border-color: #444;
+            background: #141414;
         }
 
-        /* Grid Spans */
-        .span-col-2 { grid-column: span 2; }
-        .span-row-2 { grid-row: span 2; }
-        
-        /* Specific Card Styles */
-        .profile {
-            justify-content: space-between;
-            background: linear-gradient(to bottom right, rgba(25,25,25,0.9), rgba(10,10,10,0.9));
+        /* Sizes */
+        .x2-2 { grid-column: span 2; grid-row: span 2; }
+        .x2-1 { grid-column: span 2; }
+        .x1-1 { grid-column: span 1; }
+
+        /* Content Styles */
+        .name-card { justify-content: flex-end; }
+        .name-card h1 { 
+            font-size: 2.5rem; 
+            font-weight: 200; 
+            letter-spacing: -1px; 
+            margin-bottom: 10px;
         }
 
-        .profile-status {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: #4ade80; /* Subtle green status light */
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .profile-status::before {
-            content: '';
-            width: 8px; height: 8px;
-            background: #4ade80;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #4ade80;
-        }
-
-        .profile h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin: 10px 0 5px 0;
-        }
-
-        .profile h2 {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-
-        /* Founder Project (Rashibyte) */
-        .founder-card {
-            background-color: #000;
-            padding: 0;
-            border: 1px solid var(--card-border);
-        }
-
-        /* Live Website Screenshots using Thum.io API */
-        .live-preview {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: top center;
-            transition: transform 0.6s ease;
-        }
-        
-        .founder-card .live-preview {
-            background-image: url('https://image.thum.io/get/width/800/crop/600/https://www.rashibyte.com');
-        }
-
-        .side-project-1 .live-preview {
-            background-image: url('https://image.thum.io/get/width/600/crop/400/https://web-app-ecommerce-pi.vercel.app/');
-        }
-
-        .side-project-2 .live-preview {
-            background-image: url('https://image.thum.io/get/width/600/crop/400/https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO');
-        }
-
-        .card:hover .live-preview {
-            transform: scale(1.05);
-        }
-
-        /* Overlays for readable text over images */
-        .project-info {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 24px;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
-            z-index: 2;
-        }
-
-        .tag {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
             display: block;
         }
 
-        .project-info h3 {
-            font-size: 1.4rem;
-            font-weight: 500;
-        }
-
-        /* GitHub Live Chart Card */
-        .github-card {
-            justify-content: flex-end;
-            position: relative;
-        }
-
-        .gh-chart {
+        /* Fixed Project Previews */
+        .preview-box {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            height: 100px;
-            background-image: url('https://ghchart.rshah.org/ffffff/Santosh0607');
+            inset: 0;
             background-size: cover;
-            background-position: right;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-            filter: grayscale(100%) brightness(150%);
-            transition: opacity 0.3s ease;
+            background-position: top center;
+            opacity: 0.4;
+            filter: grayscale(100%);
+            transition: 0.5s ease;
         }
 
-        .github-card:hover .gh-chart {
-            opacity: 1;
+        .card:hover .preview-box {
+            opacity: 0.8;
+            filter: grayscale(0%);
+            transform: scale(1.03);
         }
 
-        /* Social Cards */
-        .social {
-            justify-content: center;
+        .project-info {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+        }
+
+        /* Dynamic GitHub Stats Fix */
+        .github-stats {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: invert(1) brightness(0.8); /* Matches dark theme */
+        }
+
+        /* Social Icons */
+        .social-link {
             align-items: center;
-            font-size: 2.5rem;
-            color: var(--text-secondary);
+            justify-content: center;
+            font-size: 1.5rem;
         }
 
-        .social:hover { color: var(--text-primary); }
-        .social i { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .social:hover i { transform: scale(1.15); }
-
-        /* Responsive Architecture */
-        @media (max-width: 1024px) {
-            .grid-container { grid-template-columns: repeat(3, 1fr); }
-            .span-col-2 { grid-column: span 3; }
+        .social-link:hover {
+            color: var(--accent);
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
-            .span-col-2 { grid-column: span 2; }
-            .profile h1 { font-size: 2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .span-col-2, .span-row-2 { grid-column: span 1; grid-row: span 1; }
+            .bento { grid-template-columns: repeat(2, 1fr); }
+            .x2-2, .x2-1 { grid-column: span 2; }
         }
     </style>
 </head>
 <body>
 
-    <div id="terminal-loader">
-        <span id="loader-text">Initializing portfolio environments...</span>
+    <div id="gate">
+        <div style="font-family: 'JetBrains Mono'; font-size: 12px; color: #333;">ENCRYPTING SESSION...</div>
     </div>
 
-    <main class="grid-container" id="grid">
+    <main class="bento">
         
-        <div class="card span-col-2 span-row-2 profile">
-            <div class="profile-status">System Online</div>
-            <div>
-                <h2>Founder of Rashibyte & Software Engineer</h2>
-                <h1>Santosh Regmi</h1>
-                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 15px; line-height: 1.6;">
-                    Specializing in high-performance web architecture, algorithmic development, and scalable machine learning integrations.
-                </p>
-            </div>
+        <div class="card x2-2 name-card">
+            <span class="label">Identity</span>
+            <h1>Santosh Regmi</h1>
+            <div style="width: 30px; height: 1px; background: #333;"></div>
         </div>
 
-        <a href="https://www.rashibyte.com" target="_blank" class="card span-col-2 span-row-2 founder-card">
-            <div class="live-preview"></div>
+        <a href="https://www.rashibyte.com" target="_blank" class="card x2-1">
+            <div class="preview-box" style="background-image: url('https://s0.wp.com/mshots/v1/https://www.rashibyte.com?w=800');"></div>
             <div class="project-info">
-                <span class="tag">Primary Venture</span>
+                <span class="label">Venture 01</span>
                 <h3>Rashibyte</h3>
             </div>
         </a>
 
-        <a href="https://github.com/Santosh0607" target="_blank" class="card span-col-2 github-card">
-            <div class="gh-chart"></div>
-            <div style="z-index: 2;">
-                <span class="tag">Open Source</span>
-                <h3>GitHub Architecture</h3>
-            </div>
+        <a href="https://github.com/Santosh0607" target="_blank" class="card x2-1">
+            <span class="label">Github Contributions</span>
+            <img class="github-stats" src="https://github-readme-stats.vercel.app/api?username=Santosh0607&show_icons=true&theme=transparent&hide_border=true&title_color=ffffff&text_color=888888&icon_color=ffffff" alt="Stats">
         </a>
 
-        <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="card side-project-1" style="padding:0;">
-            <div class="live-preview"></div>
+        <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="card x1-1">
+            <div class="preview-box" style="background-image: url('https://s0.wp.com/mshots/v1/https://web-app-ecommerce-pi.vercel.app/?w=400');"></div>
             <div class="project-info">
-                <span class="tag">Side Project • E-Commerce</span>
-                <h3 style="font-size: 1.1rem;">SS Garment</h3>
+                <span class="label">Shop</span>
+                <h3 style="font-size: 0.9rem;">SS Garment</h3>
             </div>
         </a>
 
-        <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="card side-project-2" style="padding:0;">
-            <div class="live-preview"></div>
+        <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="card x1-1">
+            <div class="preview-box" style="background-image: url('https://s0.wp.com/mshots/v1/https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO?w=400');"></div>
             <div class="project-info">
-                <span class="tag">Side Project • AI/ML</span>
-                <h3 style="font-size: 1.1rem;">Stock AI Predictor</h3>
+                <span class="label">AI/ML</span>
+                <h3 style="font-size: 0.9rem;">Stock AI</h3>
             </div>
         </a>
 
-        <a href="https://www.linkedin.com/in/santosh-regmi0555" target="_blank" class="card social">
-            <i class="ri-linkedin-fill"></i>
+        <a href="https://www.linkedin.com/in/santosh-regmi0555" target="_blank" class="card x1-1 social-link">
+            <i class="ri-linkedin-box-fill"></i>
         </a>
-        <a href="https://x.com/santosh_algo?s=21" target="_blank" class="card social">
-            <i class="ri-twitter-x-line"></i>
+        <a href="https://x.com/santosh_algo?s=21" target="_blank" class="card x1-1 social-link">
+            <i class="ri-twitter-x-fill"></i>
         </a>
-        <a href="https://www.instagram.com/santoshhregmi" target="_blank" class="card social">
+        <a href="https://www.instagram.com/santoshhregmi" target="_blank" class="card x1-1 social-link">
             <i class="ri-instagram-line"></i>
         </a>
-        <a href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" class="card social">
-            <i class="ri-steam-fill"></i>
+        <a href="https://flickr.com/photos/198249891@N07" target="_blank" class="card x1-1 social-link">
+            <i class="ri-camera-fill"></i>
         </a>
-        <a href="https://flickr.com/photos/198249891@N07" target="_blank" class="card social">
-            <i class="ri-camera-lens-line"></i> </a>
-        
+        <a href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" class="card x2-1 social-link" style="flex-direction: row; gap: 15px;">
+            <i class="ri-steam-fill"></i>
+            <span class="label" style="margin: 0;">Steam Profile</span>
+        </a>
+
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loader = document.getElementById('terminal-loader');
-            const text = document.getElementById('loader-text');
-            const grid = document.getElementById('grid');
-
-            // Simulate high-tech terminal boot sequence
-            setTimeout(() => { text.innerText = "Loading assets..."; }, 500);
-            setTimeout(() => { text.innerText = "Establishing secure connection..."; }, 1000);
-            
+        window.addEventListener('load', () => {
+            const gate = document.getElementById('gate');
             setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.visibility = 'hidden';
-                    grid.classList.add('active');
-                }, 800);
-            }, 1500);
+                gate.style.transform = 'translateY(-100%)';
+            }, 1200);
         });
     </script>
 </body>
