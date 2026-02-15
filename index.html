@@ -1,216 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santosh Regmi</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg: #050505;
-            --card: #0f0f0f;
-            --border: #1f1f1f;
-            --accent: #ffffff;
-            --text-dim: #666;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santosh Regmi | Professional Portfolio</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-        body {
-            background-color: var(--bg);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
-            overflow-x: hidden;
-        }
+  <style>
+    :root {
+      --bg: #03060d;
+      --panel: rgba(12, 15, 24, 0.8);
+      --border: rgba(255, 255, 255, 0.06);
+      --text: #f5f7fb;
+      --muted: #9aa4b5;
+      --accent: #3c82ff;
+      --accent-2: #6ef3ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+      --radius: 20px;
+      --glass: blur(14px);
+    }
 
-        /* Startup Animation */
-        #gate {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
-        }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(120% 120% at 20% 20%, rgba(60,130,255,0.08), transparent 55%),
+                  radial-gradient(120% 120% at 80% 0%, rgba(110,243,255,0.08), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 18px 64px;
+      overflow-x: hidden;
+    }
 
-        .bento {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 160px;
-            gap: 12px;
-            max-width: 1000px;
-            width: 100%;
-        }
+    /* Loader */
+    #loader {
+      position: fixed; inset: 0;
+      display: grid; place-items: center;
+      background: #03060d;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .loader-ring {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.06);
+      border-top-color: var(--accent);
+      animation: spin 1s linear infinite;
+      position: relative;
+    }
+    .loader-text {
+      position: absolute;
+      width: 100%; text-align: center;
+      top: 110%; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--muted); font-size: 0.9rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 4px; /* Professional sharp corners */
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
+    /* Layout */
+    .shell {
+      width: min(1200px, 100%);
+    }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 18px;
+      padding: 10px 6px;
+    }
+    .brand {
+      font-weight: 800; letter-spacing: 0.05em;
+      font-size: 1.05rem;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .live-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.5; }
+      100% { transform: scale(1.15); opacity: 1; }
+    }
+    .theme-toggle {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: var(--shadow);
+    }
+    .theme-toggle:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-1px); }
 
-        .card:hover {
-            border-color: #444;
-            background: #141414;
-        }
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 16px;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .grid.loaded { opacity: 1; transform: translateY(0); }
 
-        /* Sizes */
-        .x2-2 { grid-column: span 2; grid-row: span 2; }
-        .x2-1 { grid-column: span 2; }
-        .x1-1 { grid-column: span 1; }
+    .card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      color: inherit;
+      text-decoration: none;
+      overflow: hidden;
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.12); box-shadow: 0 30px 70px rgba(0,0,0,0.55); }
+    .card::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(180px 180px at var(--mx, 50%) var(--my, 50%), rgba(60,130,255,0.08), transparent 55%);
+      opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .card:hover::after { opacity: 1; }
 
-        /* Content Styles */
-        .name-card { justify-content: flex-end; }
-        .name-card h1 { 
-            font-size: 2.5rem; 
-            font-weight: 200; 
-            letter-spacing: -1px; 
-            margin-bottom: 10px;
-        }
+    .span-2x2 { grid-column: span 2; grid-row: span 2; }
+    .span-2x1 { grid-column: span 2; grid-row: span 1; }
+    .span-1x1 { grid-column: span 1; grid-row: span 1; }
 
-        .label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            display: block;
-        }
+    /* Profile */
+    .profile {
+      display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+      background: linear-gradient(135deg, rgba(12,15,24,0.9), rgba(18,30,50,0.85));
+    }
+    .eyebrow { color: var(--accent-2); font-size: 0.8rem; letter-spacing: 0.18em; font-weight: 700; text-transform: uppercase; }
+    .headline { font-size: 2.2rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
+    .lede { color: var(--muted); line-height: 1.55; }
 
-        /* Fixed Project Previews */
-        .preview-box {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: top center;
-            opacity: 0.4;
-            filter: grayscale(100%);
-            transition: 0.5s ease;
-        }
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .stat {
+      padding: 10px 12px; border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      min-width: 110px;
+    }
+    .stat .num { font-weight: 700; font-size: 1.05rem; }
+    .stat .label { color: var(--muted); font-size: 0.8rem; }
 
-        .card:hover .preview-box {
-            opacity: 0.8;
-            filter: grayscale(0%);
-            transform: scale(1.03);
-        }
+    /* Social */
+    .social {
+      display: grid; place-items: center;
+      font-size: 1.9rem; color: var(--muted);
+    }
+    .social:hover { color: var(--text); }
 
-        .project-info {
-            position: relative;
-            z-index: 2;
-            margin-top: auto;
-        }
+    /* Projects */
+    .project {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background-size: cover; background-position: center;
+    }
+    .project .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+      z-index: 1;
+    }
+    .project .content {
+      position: relative; z-index: 2;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #e6edf7; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .proj-title { margin-top: 10px; font-size: 1.25rem; font-weight: 700; }
 
-        /* Dynamic GitHub Stats Fix */
-        .github-stats {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: invert(1) brightness(0.8); /* Matches dark theme */
-        }
+    /* Contact CTA */
+    .cta {
+      display: flex; flex-direction: column; gap: 10px; justify-content: space-between;
+      background: linear-gradient(135deg, rgba(60,130,255,0.12), rgba(12,15,24,0.95));
+      border: 1px solid rgba(60,130,255,0.3);
+    }
+    .cta .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 16px; border-radius: 12px;
+      background: var(--accent);
+      color: #0a0f1b; font-weight: 700; border: none; cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 18px 40px rgba(60,130,255,0.35);
+      text-decoration: none;
+    }
+    .cta .btn:hover { transform: translateY(-2px); box-shadow: 0 24px 50px rgba(60,130,255,0.45); }
 
-        /* Social Icons */
-        .social-link {
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
+    /* Footer row */
+    .footer {
+      grid-column: span 4;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(255,255,255,0.02);
+    }
 
-        .social-link:hover {
-            color: var(--accent);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .bento { grid-template-columns: repeat(2, 1fr); }
-            .x2-2, .x2-1 { grid-column: span 2; }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+      .span-2x2 { grid-column: span 2; grid-row: span 2; }
+      .span-2x1 { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      body { padding: 32px 14px 48px; }
+      .grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+      .span-2x2, .span-2x1, .span-1x1 { grid-column: span 1; grid-row: span 1; }
+      .headline { font-size: 1.8rem; }
+      .topbar { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  </style>
 </head>
 <body>
+  <div id="loader">
+    <div class="loader-ring"></div>
+    <div class="loader-text">SANTOSH REGMI</div>
+  </div>
 
-    <div id="gate">
-        <div style="font-family: 'JetBrains Mono'; font-size: 12px; color: #333;">ENCRYPTING SESSION...</div>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand"><span class="live-dot"></span> Santosh Regmi — Portfolio</div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fa-solid fa-circle-half-stroke"></i> Toggle Theme
+      </button>
     </div>
 
-    <main class="bento">
-        
-        <div class="card x2-2 name-card">
-            <span class="label">Identity</span>
-            <h1>Santosh Regmi</h1>
-            <div style="width: 30px; height: 1px; background: #333;"></div>
+    <main class="grid" id="grid">
+      <!-- Profile -->
+      <section class="card profile span-2x2">
+        <div>
+          <div class="eyebrow">Software Engineer & Algorithmic Developer</div>
+          <div class="headline">Building resilient systems, scalable architecture, and intelligent products.</div>
+          <p class="lede">Precision-focused on performance, API design, and machine learning–backed decisioning with enterprise rigor.</p>
         </div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">6+</div><div class="label">Years shipping</div></div>
+          <div class="stat"><div class="num">30ms</div><div class="label">Latency targets</div></div>
+          <div class="stat"><div class="num">24/7</div><div class="label">Prod reliability</div></div>
+        </div>
+      </section>
 
-        <a href="https://www.rashibyte.com" target="_blank" class="card x2-1">
-            <div class="preview-box" style="background-image: url('https://s0.wp.com/mshots/v1/https://www.rashibyte.com?w=800');"></div>
-            <div class="project-info">
-                <span class="label">Venture 01</span>
-                <h3>Rashibyte</h3>
-            </div>
-        </a>
+      <!-- Social links -->
+      <a class="card social span-1x1" href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a class="card social span-1x1" href="https://github.com/Santosh0607" target="_blank" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a class="card social span-1x1" href="https://x.com/santosh_algo?s=21" target="_blank" aria-label="Twitter/X">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a class="card social span-1x1" href="https://www.instagram.com/santoshhregmi?igsh=MWRtNTV2cWQ5dmEzYQ%3D%3D&utm_source=qr" target="_blank" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
 
-        <a href="https://github.com/Santosh0607" target="_blank" class="card x2-1">
-            <span class="label">Github Contributions</span>
-            <img class="github-stats" src="https://github-readme-stats.vercel.app/api?username=Santosh0607&show_icons=true&theme=transparent&hide_border=true&title_color=ffffff&text_color=888888&icon_color=ffffff" alt="Stats">
-        </a>
+      <!-- Projects -->
+      <a class="card project span-2x1" href="https://www.rashibyte.com" target="_blank" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80');">
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="pill"><i class="fa-solid fa-building-columns"></i> Enterprise</div>
+          <div class="proj-title">Rashibyte</div>
+        </div>
+      </a>
 
-        <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="card x1-1">
-            <div class="preview-box" style="background-image: url('https://s0.wp.com/mshots/v1/https://web-app-ecommerce-pi.vercel.app/?w=400');"></div>
-            <div class="project-info">
-                <span class="label">Shop</span>
-                <h3 style="font-size: 0.9rem;">SS Garment</h3>
-            </div>
-        </a>
+      <a class="card project span-2x1" href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80');">
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="pill"><i class="fa-solid fa-bag-shopping"></i> E‑Commerce</div>
+          <div class="proj-title">SS Garment</div>
+        </div>
+      </a>
 
-        <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="card x1-1">
-            <div class="preview-box" style="background-image: url('https://s0.wp.com/mshots/v1/https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO?w=400');"></div>
-            <div class="project-info">
-                <span class="label">AI/ML</span>
-                <h3 style="font-size: 0.9rem;">Stock AI</h3>
-            </div>
-        </a>
+      <a class="card project span-2x1" href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80');">
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="pill"><i class="fa-solid fa-chart-line"></i> Machine Learning</div>
+          <div class="proj-title">Stock AI Predictor</div>
+        </div>
+      </a>
 
-        <a href="https://www.linkedin.com/in/santosh-regmi0555" target="_blank" class="card x1-1 social-link">
-            <i class="ri-linkedin-box-fill"></i>
-        </a>
-        <a href="https://x.com/santosh_algo?s=21" target="_blank" class="card x1-1 social-link">
-            <i class="ri-twitter-x-fill"></i>
-        </a>
-        <a href="https://www.instagram.com/santoshhregmi" target="_blank" class="card x1-1 social-link">
-            <i class="ri-instagram-line"></i>
-        </a>
-        <a href="https://flickr.com/photos/198249891@N07" target="_blank" class="card x1-1 social-link">
-            <i class="ri-camera-fill"></i>
-        </a>
-        <a href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" class="card x2-1 social-link" style="flex-direction: row; gap: 15px;">
-            <i class="ri-steam-fill"></i>
-            <span class="label" style="margin: 0;">Steam Profile</span>
-        </a>
+      <!-- Extra socials -->
+      <a class="card social span-1x1" href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" aria-label="Steam">
+        <i class="fa-brands fa-steam"></i>
+      </a>
+      <a class="card social span-1x1" href="https://flickr.com/photos/198249891@N07" target="_blank" aria-label="Flickr">
+        <i class="fa-brands fa-flickr"></i>
+      </a>
 
+      <!-- Contact CTA -->
+      <section class="card cta span-2x1">
+        <div>
+          <div class="eyebrow">Let’s build</div>
+          <div class="headline" style="font-size:1.4rem;">Available for high-impact engineering roles & collaborations.</div>
+          <p class="lede">Systems, ML-backed products, and latency-sensitive services with production discipline.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="mailto:sregmi0113@gmail.com"><i class="fa-solid fa-paper-plane"></i> Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" style="background:#0f172a; color:#e7edfa; box-shadow:none; border:1px solid rgba(255,255,255,0.14);"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        </div>
+      </section>
+
+      <!-- Footer row -->
+      <div class="footer">
+        <span>Currently focused on: high-availability APIs, quantitative tooling, and ML-assisted decision systems.</span>
+        <span>Last updated: 2026-02-15</span>
+      </div>
     </main>
+  </div>
 
-    <script>
-        window.addEventListener('load', () => {
-            const gate = document.getElementById('gate');
-            setTimeout(() => {
-                gate.style.transform = 'translateY(-100%)';
-            }, 1200);
-        });
-    </script>
+  <script>
+    // Loader + grid reveal
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        const grid = document.getElementById('grid');
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        grid.classList.add('loaded');
+      }, 1400);
+    });
+
+    // Spotlight hover
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const rect = card.getBoundingClientRect();
+        const mx = ((e.clientX - rect.left) / rect.width) * 100;
+        const my = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mx', `${mx}%`);
+        card.style.setProperty('--my', `${my}%`);
+      });
+    });
+
+    // Theme toggle (light/dark)
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    let dark = true;
+    toggle.addEventListener('click', () => {
+      dark = !dark;
+      if (!dark) {
+        root.style.setProperty('--bg', '#f6f8fb');
+        root.style.setProperty('--panel', 'rgba(255,255,255,0.82)');
+        root.style.setProperty('--border', 'rgba(0,0,0,0.06)');
+        root.style.setProperty('--text', '#0c1524');
+        root.style.setProperty('--muted', '#4b5568');
+        root.style.setProperty('--shadow', '0 18px 50px rgba(15, 23, 42, 0.12)');
+      } else {
+        root.style.setProperty('--bg', '#03060d');
+        root.style.setProperty('--panel', 'rgba(12, 15, 24, 0.8)');
+        root.style.setProperty('--border', 'rgba(255, 255, 255, 0.06)');
+        root.style.setProperty('--text', '#f5f7fb');
+        root.style.setProperty('--muted', '#9aa4b5');
+        root.style.setProperty('--shadow', '0 20px 60px rgba(0, 0, 0, 0.55)');
+      }
+      document.body.style.background = dark
+        ? 'radial-gradient(120% 120% at 20% 20%, rgba(60,130,255,0.08), transparent 55%), radial-gradient(120% 120% at 80% 0%, rgba(110,243,255,0.08), transparent 50%), #03060d'
+        : '#f6f8fb';
+    });
+  </script>
 </body>
 </html>
