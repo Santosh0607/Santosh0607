@@ -3,276 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santosh Regmi | Professional Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Santosh Regmi | Founder & Engineer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
     <style>
-        /* Base Variables & Reset */
+        /* High-End Dark Theme Variables */
         :root {
-            --bg-color: #050505;
-            --card-bg: rgba(25, 25, 25, 0.8);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --accent: #2c6bed;
+            --bg-base: #030303;
+            --bg-grid: rgba(255, 255, 255, 0.03);
+            --card-bg: rgba(15, 15, 15, 0.6);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-hover-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #f0f0f0;
+            --text-secondary: #888888;
+            --accent: #ffffff;
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            /* Subtle technical grid background */
+            background-image: linear-gradient(var(--bg-grid) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+            padding: 40px 20px;
         }
 
-        /* Intro Animation Loader */
-        #loader {
+        /* Initializing Terminal Loader */
+        #terminal-loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg-color);
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-base);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
         }
 
-        .loader-text {
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 0.5rem;
-            animation: pulse 1.5s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        /* Bento Grid Container */
-        .bento-grid {
+        /* Main Grid Architecture */
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 180px;
-            gap: 16px;
-            max-width: 1000px;
-            width: 90%;
-            margin: 40px auto;
+            grid-auto-rows: 200px;
+            gap: 20px;
+            max-width: 1100px;
+            width: 100%;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(20px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .bento-grid.loaded {
+        .grid-container.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Base Card Styling */
+        /* Glassmorphism Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 24px;
+            border-radius: 16px; /* Sharper corners for a corporate look */
             padding: 24px;
             text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            color: var(--text-primary);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--card-hover-border);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
         }
 
         /* Grid Spans */
-        .span-2x2 { grid-column: span 2; grid-row: span 2; }
-        .span-2x1 { grid-column: span 2; grid-row: span 1; }
-        .span-1x1 { grid-column: span 1; grid-row: span 1; }
-
-        /* Specific Cards */
-        .profile-card {
-            justify-content: flex-end;
-            background: linear-gradient(135deg, rgba(30,30,30,1) 0%, rgba(15,15,15,1) 100%);
+        .span-col-2 { grid-column: span 2; }
+        .span-row-2 { grid-row: span 2; }
+        
+        /* Specific Card Styles */
+        .profile {
+            justify-content: space-between;
+            background: linear-gradient(to bottom right, rgba(25,25,25,0.9), rgba(10,10,10,0.9));
         }
 
-        .profile-card h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .profile-card p {
-            color: var(--text-muted);
-            font-weight: 300;
-            line-height: 1.5;
-        }
-
-        /* Social Cards */
-        .social-card {
-            justify-content: center;
+        .profile-status {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #4ade80; /* Subtle green status light */
+            display: flex;
             align-items: center;
-            font-size: 3rem;
-            color: var(--text-muted);
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .profile-status::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4ade80;
         }
 
-        .social-card:hover { color: var(--text-main); }
-        .social-card i { transition: transform 0.3s ease; }
-        .social-card:hover i { transform: scale(1.1); }
+        .profile h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 10px 0 5px 0;
+        }
 
-        /* Project Cards */
-        .project-card {
+        .profile h2 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Founder Project (Rashibyte) */
+        .founder-card {
+            background-color: #000;
+            padding: 0;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Live Website Screenshots using Thum.io API */
+        .live-preview {
+            width: 100%;
+            height: 100%;
             background-size: cover;
-            background-position: center;
-            justify-content: flex-end;
+            background-position: top center;
+            transition: transform 0.6s ease;
+        }
+        
+        .founder-card .live-preview {
+            background-image: url('https://image.thum.io/get/width/800/crop/600/https://www.rashibyte.com');
         }
 
-        .project-overlay {
+        .side-project-1 .live-preview {
+            background-image: url('https://image.thum.io/get/width/600/crop/400/https://web-app-ecommerce-pi.vercel.app/');
+        }
+
+        .side-project-2 .live-preview {
+            background-image: url('https://image.thum.io/get/width/600/crop/400/https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO');
+        }
+
+        .card:hover .live-preview {
+            transform: scale(1.05);
+        }
+
+        /* Overlays for readable text over images */
+        .project-info {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-            z-index: 1;
-        }
-
-        .project-content {
-            position: relative;
+            bottom: 0; left: 0; right: 0;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
             z-index: 2;
         }
 
-        .project-content h3 {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
-
-        .project-content span {
-            font-size: 0.85rem;
-            color: #d0d0d0;
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            display: block;
         }
 
-        /* Image place holders for projects */
-        .bg-rashibyte { background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop'); }
-        .bg-ssgarment { background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=600&auto=format&fit=crop'); }
-        .bg-stockai { background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=600&auto=format&fit=crop'); }
-
-        /* Responsive Design */
-        @media (max-width: 900px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .span-2x2 { grid-column: span 2; }
-            .span-2x1 { grid-column: span 2; }
+        .project-info h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
         }
 
-        @media (max-width: 500px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-            .span-2x2, .span-2x1, .span-1x1 {
-                grid-column: span 1;
-            }
+        /* GitHub Live Chart Card */
+        .github-card {
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .gh-chart {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            height: 100px;
+            background-image: url('https://ghchart.rshah.org/ffffff/Santosh0607');
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            filter: grayscale(100%) brightness(150%);
+            transition: opacity 0.3s ease;
+        }
+
+        .github-card:hover .gh-chart {
+            opacity: 1;
+        }
+
+        /* Social Cards */
+        .social {
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--text-secondary);
+        }
+
+        .social:hover { color: var(--text-primary); }
+        .social i { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .social:hover i { transform: scale(1.15); }
+
+        /* Responsive Architecture */
+        @media (max-width: 1024px) {
+            .grid-container { grid-template-columns: repeat(3, 1fr); }
+            .span-col-2 { grid-column: span 3; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: repeat(2, 1fr); }
+            .span-col-2 { grid-column: span 2; }
+            .profile h1 { font-size: 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .span-col-2, .span-row-2 { grid-column: span 1; grid-row: span 1; }
         }
     </style>
 </head>
 <body>
 
-    <div id="loader">
-        <div class="loader-text">SANTOSH REGMI</div>
+    <div id="terminal-loader">
+        <span id="loader-text">Initializing portfolio environments...</span>
     </div>
 
-    <main class="bento-grid" id="main-grid">
+    <main class="grid-container" id="grid">
         
-        <div class="card span-2x2 profile-card">
-            <div style="margin-bottom: auto;">
-                <i class="fa-solid fa-bolt" style="color: var(--accent); font-size: 1.5rem;"></i>
-            </div>
+        <div class="card span-col-2 span-row-2 profile">
+            <div class="profile-status">System Online</div>
             <div>
+                <h2>Founder of Rashibyte & Software Engineer</h2>
                 <h1>Santosh Regmi</h1>
-                <p>Software Engineer & Algorithmic Developer. Showcasing a blend of sophisticated engineering and scalable architecture.</p>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-top: 15px; line-height: 1.6;">
+                    Specializing in high-performance web architecture, algorithmic development, and scalable machine learning integrations.
+                </p>
             </div>
         </div>
 
-        <a href="https://www.linkedin.com/in/santosh-regmi0555?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="card span-1x1 social-card">
-            <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <a href="https://github.com/Santosh0607" target="_blank" class="card span-1x1 social-card">
-            <i class="fa-brands fa-github"></i>
-        </a>
-
-        <a href="https://x.com/santosh_algo?s=21" target="_blank" class="card span-1x1 social-card">
-            <i class="fa-brands fa-x-twitter"></i>
-        </a>
-        <a href="https://www.instagram.com/santoshhregmi?igsh=MWRtNTV2cWQ5dmEzYQ%3D%3D&utm_source=qr" target="_blank" class="card span-1x1 social-card">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-
-        <a href="https://www.rashibyte.com" target="_blank" class="card span-2x1 project-card bg-rashibyte">
-            <div class="project-overlay"></div>
-            <div class="project-content">
-                <span>Enterprise</span>
+        <a href="https://www.rashibyte.com" target="_blank" class="card span-col-2 span-row-2 founder-card">
+            <div class="live-preview"></div>
+            <div class="project-info">
+                <span class="tag">Primary Venture</span>
                 <h3>Rashibyte</h3>
             </div>
         </a>
 
-        <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="card span-2x1 project-card bg-ssgarment">
-            <div class="project-overlay"></div>
-            <div class="project-content">
-                <span>E-Commerce</span>
-                <h3>SS Garment</h3>
+        <a href="https://github.com/Santosh0607" target="_blank" class="card span-col-2 github-card">
+            <div class="gh-chart"></div>
+            <div style="z-index: 2;">
+                <span class="tag">Open Source</span>
+                <h3>GitHub Architecture</h3>
             </div>
         </a>
 
-        <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="card span-2x1 project-card bg-stockai">
-            <div class="project-overlay"></div>
-            <div class="project-content">
-                <span>Machine Learning</span>
-                <h3>Stock AI Predictor</h3>
+        <a href="https://web-app-ecommerce-pi.vercel.app/" target="_blank" class="card side-project-1" style="padding:0;">
+            <div class="live-preview"></div>
+            <div class="project-info">
+                <span class="tag">Side Project • E-Commerce</span>
+                <h3 style="font-size: 1.1rem;">SS Garment</h3>
             </div>
         </a>
 
-        <a href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" class="card span-1x1 social-card">
-            <i class="fa-brands fa-steam"></i>
-        </a>
-        <a href="https://flickr.com/photos/198249891@N07" target="_blank" class="card span-1x1 social-card">
-            <i class="fa-brands fa-flickr"></i>
+        <a href="https://huggingface.co/spaces/Santosh0607/STOCKAIDEMO" target="_blank" class="card side-project-2" style="padding:0;">
+            <div class="live-preview"></div>
+            <div class="project-info">
+                <span class="tag">Side Project • AI/ML</span>
+                <h3 style="font-size: 1.1rem;">Stock AI Predictor</h3>
+            </div>
         </a>
 
+        <a href="https://www.linkedin.com/in/santosh-regmi0555" target="_blank" class="card social">
+            <i class="ri-linkedin-fill"></i>
+        </a>
+        <a href="https://x.com/santosh_algo?s=21" target="_blank" class="card social">
+            <i class="ri-twitter-x-line"></i>
+        </a>
+        <a href="https://www.instagram.com/santoshhregmi" target="_blank" class="card social">
+            <i class="ri-instagram-line"></i>
+        </a>
+        <a href="https://steamcommunity.com/profiles/76561198836609320/" target="_blank" class="card social">
+            <i class="ri-steam-fill"></i>
+        </a>
+        <a href="https://flickr.com/photos/198249891@N07" target="_blank" class="card social">
+            <i class="ri-camera-lens-line"></i> </a>
+        
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Remove loader and trigger bento animation after 1.8 seconds
+            const loader = document.getElementById('terminal-loader');
+            const text = document.getElementById('loader-text');
+            const grid = document.getElementById('grid');
+
+            // Simulate high-tech terminal boot sequence
+            setTimeout(() => { text.innerText = "Loading assets..."; }, 500);
+            setTimeout(() => { text.innerText = "Establishing secure connection..."; }, 1000);
+            
             setTimeout(() => {
-                const loader = document.getElementById('loader');
-                const grid = document.getElementById('main-grid');
-                
                 loader.style.opacity = '0';
                 setTimeout(() => {
                     loader.style.visibility = 'hidden';
-                    grid.classList.add('loaded');
-                }, 800); // wait for fade out to finish
-            }, 1800);
+                    grid.classList.add('active');
+                }, 800);
+            }, 1500);
         });
     </script>
 </body>
